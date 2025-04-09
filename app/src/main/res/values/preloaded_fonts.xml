@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="preloaded_fonts" translatable="false">
+        <item>@font/adlam_display</item>
+        <item>@font/berkshire_swash</item>
+        <item>@font/diphylleia</item>
+        <item>@font/do_hyeon</item>
+        <item>@font/jua</item>
+        <item>@font/noto_serif</item>
+        <item>@font/yeon_sung</item>
+    </array>
+</resources>

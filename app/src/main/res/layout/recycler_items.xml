@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@android:color/transparent"
-    >
+    android:background="@android:color/transparent">
 
     <TextView
         android:id="@+id/tv_coment"
@@ -29,7 +28,6 @@
         android:layout_height="250dp"
         android:layout_marginStart="2dp"
         android:layout_marginTop="144dp"
-        android:layout_marginBottom="7dp"
         android:background="@drawable/rect_border_white"
         android:padding="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -61,5 +59,21 @@
         android:textSize="15sp"
         app:layout_constraintBottom_toTopOf="@+id/tv_coment"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_store"
+        android:layout_width="wrap_content"
+        android:layout_height="22dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="6dp"
+        android:background="@color/white"
+        android:drawableRight="@drawable/baseline_download_24"
+        android:fontFamily="@font/jua"
+        android:paddingLeft="3dp"
+        android:paddingRight="3dp"
+        android:text="앨범에 저장"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/img_dreamImg"
+        app:layout_constraintTop_toBottomOf="@+id/img_dreamImg" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

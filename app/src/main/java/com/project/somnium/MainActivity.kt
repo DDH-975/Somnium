@@ -6,10 +6,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.lifecycle.lifecycleScope
 import com.project.somnium.databinding.ActivityMainBinding
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,15 +20,15 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        val makeImage = Intent(this@MainActivity,MakeImageActivity::class.java)
+        val makeImage = Intent(this@MainActivity, MakeImageActivity::class.java)
         val writeDiary = Intent(this@MainActivity, WriteDiaryActivity::class.java)
-        val readDiary = Intent(this@MainActivity, ReadDiary::class.java )
+        val readDiary = Intent(this@MainActivity, ReadDiary::class.java)
 
-        binding.btnMakeImg.setOnClickListener{
+        binding.btnMakeImg.setOnClickListener {
             startActivity(makeImage)
         }
 
-        binding.btnWriteDiary.setOnClickListener{
+        binding.btnWriteDiary.setOnClickListener {
             startActivity(writeDiary)
         }
 

@@ -16,13 +16,19 @@
 
         <!-- 설명 텍스트 -->
         <TextView
-            android:id="@+id/titleText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="당신의 꿈을 그려드릴게요 "
             android:fontFamily="@font/jua"
             android:textColor="@color/white"
-            android:textSize="18sp"
+            android:textSize="18sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="※ 영어로 입력시 더 정확한 이미지를 얻을 수 있습니다."
+            android:fontFamily="@font/jua"
+            android:textColor="@color/white"
+            android:textSize="12sp"
             android:layout_marginBottom="8dp" />
 
         <!-- 채팅 메시지 리스트 -->

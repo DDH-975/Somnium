@@ -1,11 +1,162 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     tools:context=".WriteDiaryActivity">
 
+    <ImageButton
+        android:id="@+id/imgBtn_back"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:scaleType="fitXY"
+        android:background="@android:color/transparent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/baseline_clear_24" />
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:fontFamily="@font/jua"
+        android:text="꿈 일기 쓰기"
+        android:textSize="23sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_complete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:background="@android:color/transparent"
+        android:fontFamily="@font/jua"
+        android:text="완료"
+        android:textColor="#ff0000"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imgBtn_back"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imgBtn_back" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:hint="제목을 입력해주세요"
+        app:boxBackgroundMode="outline"
+        app:boxCornerRadiusBottomEnd="12dp"
+        app:boxCornerRadiusBottomStart="12dp"
+        app:boxCornerRadiusTopEnd="12dp"
+        app:boxCornerRadiusTopStart="12dp"
+        app:boxStrokeWidth="2dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgBtn_back">
+
+        <EditText
+            android:id="@+id/et_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/jua"
+            android:inputType="textMultiLine"
+            android:maxLines="5"
+            android:textSize="18sp"></EditText>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayoutBody"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="130dp"
+        android:hint="꿈의 내용을 자유롭게 기록해보세요"
+        app:boxBackgroundMode="outline"
+        app:boxCornerRadiusBottomEnd="12dp"
+        app:boxCornerRadiusBottomStart="12dp"
+        app:boxCornerRadiusTopEnd="12dp"
+        app:boxCornerRadiusTopStart="12dp"
+        app:boxStrokeWidth="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/textInputLayout"
+        app:layout_constraintStart_toStartOf="@+id/textInputLayout"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
+
+        <EditText
+            android:id="@+id/et_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/jua"
+            android:gravity="top|start"
+            android:inputType="textMultiLine"
+            android:maxLines="50"
+            android:minLines="6"
+            android:textSize="16sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_AddImage"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/rect_border_white"
+        android:fontFamily="@font/jua"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:text="🖼 이미지 추가"
+        app:layout_constraintStart_toStartOf="@+id/textInputLayoutBody"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutBody" />
+
+    <ImageView
+        android:id="@+id/img_SelectedIMG"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintStart_toEndOf="@+id/btn_AddImage"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutBody" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/bnt_deleteIMG"
+        android:layout_width="wrap_content"
+        android:layout_height="28dp"
+        android:layout_marginBottom="17dp"
+        android:visibility="invisible"
+        android:background="@drawable/rect_border_white"
+        android:drawableRight="@drawable/baseline_clear_24"
+        android:fontFamily="@font/jua"
+        android:text="삭제"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/img_SelectedIMG"
+        app:layout_constraintStart_toStartOf="@+id/img_SelectedIMG"
+        app:layout_constraintTop_toBottomOf="@+id/img_SelectedIMG" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/rect_border_white"
+        android:fontFamily="@font/jua"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text="이미지는 한 장만 \n추가할 수 있습니다."
+        android:textSize="16dp"
+        app:layout_constraintEnd_toEndOf="@+id/textInputLayoutBody"
+        app:layout_constraintStart_toEndOf="@+id/img_SelectedIMG"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutBody" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+

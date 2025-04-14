@@ -10,8 +10,8 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.project.somnium.databinding.ActivityMakeImageBinding
-import com.project.somnium.recyclerview.Adapter
-import com.project.somnium.recyclerview.RecyclerDataModel
+import com.project.somnium.makeImgRecycler.Adapter
+import com.project.somnium.makeImgRecycler.RecyclerDataModel
 import com.project.somnium.retrofit.GptRequest
 
 

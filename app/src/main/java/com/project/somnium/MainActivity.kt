@@ -20,20 +20,20 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        val makeImage = Intent(this@MainActivity, MakeImageActivity::class.java)
-        val writeDiary = Intent(this@MainActivity, WriteDiaryActivity::class.java)
-        val readDiary = Intent(this@MainActivity, ReadDiary::class.java)
+        val goToMakeImageIntent = Intent(this@MainActivity, MakeImageActivity::class.java)
+        val goToWriteDiaryIntent = Intent(this@MainActivity, WriteDiaryActivity::class.java)
+        val goToReadDiaryIntent = Intent(this@MainActivity, DiaryListActivity::class.java)
 
         binding.btnMakeImg.setOnClickListener {
-            startActivity(makeImage)
+            startActivity(goToMakeImageIntent)
         }
 
         binding.btnWriteDiary.setOnClickListener {
-            startActivity(writeDiary)
+            startActivity(goToWriteDiaryIntent)
         }
 
         binding.btnReadDiary.setOnClickListener {
-            startActivity(readDiary)
+            startActivity(goToReadDiaryIntent)
         }
 
 

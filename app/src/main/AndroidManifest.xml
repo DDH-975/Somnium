@@ -7,7 +7,6 @@
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="28" />
 
-
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -20,6 +19,9 @@
         tools:targetApi="31">
         <activity
             android:name=".ReadDiary"
+            android:exported="false" />
+        <activity
+            android:name=".DiaryListActivity"
             android:exported="false" />
         <activity
             android:name=".WriteDiaryActivity"

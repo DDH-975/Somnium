@@ -51,10 +51,6 @@ class DiaryListAdapter(
 
 
         holder.btn_read.setOnClickListener {
-            intent.putExtra("title", item.title)
-            intent.putExtra("content", item.content)
-            intent.putExtra("imgUrl", item.imgurl)
-            intent.putExtra("date", item.date)
             intent.putExtra("id", item.id)
             context.startActivity(intent)
         }
@@ -71,7 +67,7 @@ class DiaryListAdapter(
         val btn_read = itemView.findViewById<Button>(R.id.btn_read)
     }
 
-    fun removeItme(position: Int) {
+    private fun removeItme(position: Int) {
         items.removeAt(position)
         notifyItemRemoved(position)
         notifyItemRangeRemoved(position, items.size)

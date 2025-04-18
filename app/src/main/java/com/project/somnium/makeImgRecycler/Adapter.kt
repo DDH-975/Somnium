@@ -77,7 +77,7 @@ class Adapter(val itemList: ArrayList<RecyclerDataModel>) :
 
 
     //이미지 갤러리 저장 메서드
-    fun saveImageToGallery(context: Context, bitmap: Bitmap) {
+    private fun saveImageToGallery(context: Context, bitmap: Bitmap) {
         val filename = "image_${System.currentTimeMillis()}.png"
         var fos: OutputStream? = null
 

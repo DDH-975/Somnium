@@ -30,9 +30,9 @@ class WriteDiaryActivity : AppCompatActivity() {
     private var imageUri: Uri? = null
     private lateinit var binding: ActivityWriteDiaryBinding
 
-    private lateinit var goToListIntent : Intent
-    private lateinit var goToMainIntent : Intent
-    private lateinit var returnToReadIntent : Intent
+    private lateinit var goToListIntent: Intent
+    private lateinit var goToMainIntent: Intent
+    private lateinit var returnToReadIntent: Intent
 
     private val pickImage =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -114,7 +114,7 @@ class WriteDiaryActivity : AppCompatActivity() {
 
 
     //완료 버튼 클릭시 실행될 메서드
-    fun clickBtnComplete(diaryDao: DiaryDao, mode: String?, id: Int) {
+    private fun clickBtnComplete(diaryDao: DiaryDao, mode: String?, id: Int) {
         title = binding.etTitle.text.toString()
         content = binding.etContent.text.toString()
 
@@ -130,7 +130,7 @@ class WriteDiaryActivity : AppCompatActivity() {
     }
 
     // DB 저장
-    fun saveData(diaryDao: DiaryDao, mode: String?, id: Int) {
+    private fun saveData(diaryDao: DiaryDao, mode: String?, id: Int) {
         if (mode.isNullOrBlank()) {
             val data = DiaryDataClass(
                 date = date.toString(),
@@ -167,7 +167,7 @@ class WriteDiaryActivity : AppCompatActivity() {
 
 
     //수정 요청 시 ID로 선택된 일기의 데이터를 UI에 반영
-    fun editedRequest(diaryDao: DiaryDao, id: Int) {
+    private fun editedRequest(diaryDao: DiaryDao, id: Int) {
         lifecycleScope.launch(Dispatchers.IO) {
             val data = diaryDao.selectByID(id)
 

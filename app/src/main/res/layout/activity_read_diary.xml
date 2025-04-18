@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#CDE7F0"
+    android:background="@drawable/nightbg2"
     tools:context=".ReadDiary">
 
     <ImageView

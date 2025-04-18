@@ -2,7 +2,6 @@ package com.project.somnium
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.ActivityResultLauncher
@@ -19,8 +18,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class ReadDiary : AppCompatActivity() {
-    private lateinit var goToWriteIntent : Intent
-    private lateinit var binding : ActivityReadDiaryBinding
+    private lateinit var binding: ActivityReadDiaryBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,43 +34,45 @@ class ReadDiary : AppCompatActivity() {
         val requestLauncher: ActivityResultLauncher<Intent> = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()
         ) {
-            val id = intent.getIntExtra("id", -1)
+            val updateId = it.data?.getIntExtra("id", -1) ?: -1
 
-            lifecycleScope.launch(Dispatchers.IO){
-                val db = DataBase.getDatabase(this@ReadDiary)
-                val diaryDao = db.DiaryDataDao()
-                val data = diaryDao.selectByID(id)
-
-                withContext(Dispatchers.Main){
-                    setWidget(data.title, data.content, data.imgurl, data.date)
-                }
-            }
+            outPutData(updateId)
 
         }
 
-        goToWriteIntent = Intent(this@ReadDiary, WriteDiaryActivity::class.java)
+        val goToWriteIntent = Intent(this@ReadDiary, WriteDiaryActivity::class.java)
 
-        val title = intent.getStringExtra("title")
-        val content = intent.getStringExtra("content")
-        val imgUrl = intent.getStringExtra("imgUrl")
-        val date = intent.getStringExtra("date")
         val id = intent.getIntExtra("id", -1)
 
+        outPutData(id)
 
 
-        setWidget(title, content, imgUrl, date)
-
-
+        //수정 버튼
         binding.btnEdit.setOnClickListener {
             goToWriteIntent.putExtra("mode", "수정")
             goToWriteIntent.putExtra("id", id)
             requestLauncher.launch(goToWriteIntent)
         }
 
+
     }
 
+    // 전달받은 id로 DB에서 일기 데이터를 가져와 UI에 출력
+    private fun outPutData(id: Int) {
+        lifecycleScope.launch(Dispatchers.IO) {
+            val db = DataBase.getDatabase(this@ReadDiary)
+            val diaryDao = db.DiaryDataDao()
+            val data = diaryDao.selectByID(id)
+
+            withContext(Dispatchers.Main) {
+                setWidget(data.title, data.content, data.imgurl, data.date)
+            }
+        }
+    }
+
+
     //위젯 설정
-    fun setWidget(title: String?, content: String?, imgUrl: String?, date: String?){
+    private fun setWidget(title: String?, content: String?, imgUrl: String?, date: String?) {
         if (imgUrl == "null") {
             listOf(binding.diaryImage, binding.tvDate).forEach { it.visibility = View.GONE }
             binding.tvDateNoImg.visibility = View.VISIBLE

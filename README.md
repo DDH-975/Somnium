@@ -81,6 +81,7 @@
 - 향후에는 이미지 품질과 정확도를 높이기 위해 다른 이미지 생성 모델(예: SDXL, Gemini Vision 등)을 고려하거나,
 프롬프트 전처리 및 번역 최적화를 적용해볼 수 있을 것 같습니다.
 
+---
 
 <br> <br> <br>
 ## 실행 화면 (Screenshots & GIFs)
@@ -116,9 +117,16 @@
 <h3>일기 보기 </h3>
 <table>
    <tr>
+    <th>일기 목록</th>
+    <th>사진 있는 일기</th>
+    <th>사진 없는 일기</th>
+    <th>실행 화면</th>
+  </tr>
+   <tr>
     <td><img src="screenshot/diarylist.png" width="225"/></td>
     <td><img src="screenshot/diaryimage.png" width="225"/></td>
     <td><img src="screenshot/diarynoimage.png" width="225"/></td>
+     <td><img src="screenshot/diarygif.gif" width="225"/></td>
   </tr>
 </table>
   

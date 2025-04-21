@@ -69,5 +69,5 @@
 - DALL·E로부터 받은 이미지 URL을 **효율적으로 로딩**
 
 ### 📌 Coroutine
-- lifecycleScope.launch(Dispatchers.IO)를 통해 Room과 Retrofit 작업 처리
-- withContext(Dispatchers.Main)을 이용해 UI 업데이트
+- `lifecycleScope.launch(Dispatchers.IO)`를 통해 Room과 Retrofit 작업 처리
+- `withContext(Dispatchers.Main)`을 이용해 UI 업데이트

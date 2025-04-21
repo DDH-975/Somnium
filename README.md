@@ -82,5 +82,44 @@
 프롬프트 전처리 및 번역 최적화를 적용해볼 수 있을 것 같습니다.
 
 
+<br> <br> <br>
+## 실행 화면 (Screenshots & GIFs)
+
+<h3>메인 화면</h3>
+img src="screenshot/home.png" width="220"/>
+
+
+<h3>이미지 생성 기능</h3>
+
+<table>
+  <tr>
+    <td><img src="screenshot/makeimg.png" width="220"/></td>
+    <td><img src="screenshot/makeimg2.png" width="220"/></td>
+    <td><img src="screenshot/makeimg3.png" width="220"/></td>
+  </tr>
+</table>
+
+img src="screenshot/home.png" width="220"/>
+
+
+<br>
+<h3>⏳ 타이머 실행 예시 기본 모드(25분 공부 + 5분 휴식), 커스텀 모드</h3>
+
+<table>
+  <tr>
+    <th>기본 모드</th>
+    <th>커스텀 모드</th>
+  </tr>
+  <tr>
+    <td><img src="screenshot/gifbasic.gif" width="225"/></td>
+    <td><img src="screenshot/gifcustom.gif" width="225"/></td>
+  </tr>
+</table>
+※ 실행 흐름을 확인할 수 있도록, 실제 앱 실행 장면을 녹화하고 필요 없는 부분을 잘라내어 GIF로 편집했습니다. <br>실제 사용 흐름을 간단하게 보여주기 위한 참고 영상입니다.
+<br> <br>
+
+### 📊 공부 통계 화면
+<img src="screenshot/statistics.gif" alt="App Demo" width="250">
+
 
 

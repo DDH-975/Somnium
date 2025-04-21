@@ -101,6 +101,16 @@
   </tr>
 </table>
 
+<table>
+  <tr>
+    <th>실행 GIF</th>
+  </tr>
+  <tr>
+    <td><img src="screenshot/makeimg_gif.gif" width="220"/></td>
+  </tr>
+</table>
+
+
 
 <br>
 <h3>🖊 일기 쓰기 </h3>
@@ -109,9 +119,19 @@
   <tr>
     <td><img src="screenshot/writediary2.png" width="225"/></td>
     <td><img src="screenshot/writediary.png" width="225"/></td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <th>실행 GIF</th>
+  </tr>
+  <tr>
     <td><img src="screenshot/writediary_gif.gif" width="225"/></td>
   </tr>
 </table>
+
+
 <br> <br>
 
 <h3>📖 일기 보기 </h3>
@@ -120,15 +140,20 @@
     <th>일기 목록</th>
     <th>사진 있는 일기</th>
     <th>사진 없는 일기</th>
-    <th>실행 화면</th>
   </tr>
    <tr>
     <td><img src="screenshot/diarylist.png" width="225"/></td>
     <td><img src="screenshot/diaryimage.png" width="225"/></td>
     <td><img src="screenshot/diarynoimage.png" width="225"/></td>
-     <td><img src="screenshot/diarygif.gif" width="225"/></td>
   </tr>
 </table>
   
-
+<table>
+  <tr>
+    <th>실행 GIF</th>
+  </tr>
+  <tr>
+     <td><img src="screenshot/diarygif.gif" width="225"/></td>
+  </tr>
+</table>
 

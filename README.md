@@ -97,7 +97,6 @@
     <td><img src="screenshot/makeimg.png" width="220"/></td>
     <td><img src="screenshot/makeimg2.png" width="220"/></td>
     <td><img src="screenshot/makeimg3.png" width="220"/></td>
-    <td><img src="screenshot/makeimg_gif.gif" width="220"/></td>
   </tr>
 </table>
 

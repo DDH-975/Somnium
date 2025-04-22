@@ -29,7 +29,7 @@
 - **개발 환경**: Android Studio  
 - **라이브러리 (Libraries)**:  
   - **Room** - 꿈 일기 로컬 DB 저장  
-  - **Retrofit** - Open API (DALL·E) 연동  
+  - **Retrofit 2** - Open API (DALL·E) 연동  
   - **Glide** - 이미지 로딩 최적화  
   - **Coroutines** - 비동기 처리 (IO → Main 스레드 전환 등)  
   - **RecyclerView** - 꿈 일기 리스트 구현  

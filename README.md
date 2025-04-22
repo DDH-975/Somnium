@@ -145,8 +145,8 @@
 <table>
    <tr>
     <th>일기 목록</th>
-    <th>사진 있는 일기</th>
-    <th>사진 없는 일기</th>
+    <th>사진이 있는 일기</th>
+    <th>사진이 없는 일기</th>
   </tr>
    <tr>
     <td><img src="screenshot/diarylist.png" width="225"/></td>

@@ -28,4 +28,11 @@ interface DiaryDao {
 
     @Query("select * from DiaryDB where id = :id")
     suspend fun selectByID(id: Int) : DiaryDataClass
+
+    @Query("select * " +
+            "from DiaryDB " +
+            "where imgurl is not null " +
+            "order by id desc limit 4")
+
+    suspend fun getDataDesc() : List<DiaryDataClass>
 }

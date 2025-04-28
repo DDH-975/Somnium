@@ -1,4 +1,4 @@
-package com.project.somnium.diaryListRecycler
+package com.project.somnium.diary_List_Recycler
 
 import android.content.Intent
 import android.view.LayoutInflater

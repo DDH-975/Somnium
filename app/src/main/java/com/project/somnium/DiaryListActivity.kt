@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.project.somnium.databinding.ActivityDiaryListBinding
 import com.project.somnium.diaryDb.DataBase
-import com.project.somnium.diaryListRecycler.DiaryListAdapter
+import com.project.somnium.diary_List_Recycler.DiaryListAdapter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

@@ -1,4 +1,4 @@
-package com.project.somnium.makeImgRecycler
+package com.project.somnium.makeImg_Recycler
 
 import android.content.ContentValues
 import android.content.Context

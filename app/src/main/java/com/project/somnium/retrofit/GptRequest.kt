@@ -2,7 +2,7 @@ package com.project.somnium.retrofit
 
 import android.util.Log
 import com.project.somnium.BuildConfig
-import com.project.somnium.makeImgRecycler.RecyclerDataModel
+import com.project.somnium.makeImg_Recycler.RecyclerDataModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

@@ -29,7 +29,7 @@
 - **개발 환경**: Android Studio  
 - **라이브러리 (Libraries)**:  
   - **Room** - 꿈 일기 로컬 DB 저장  
-  - **Retrofit** - Open API (DALL·E) 연동  
+  - **Retrofit 2** - Open API (DALL·E) 연동  
   - **Glide** - 이미지 로딩 최적화  
   - **Coroutines** - 비동기 처리 (IO → Main 스레드 전환 등)  
   - **RecyclerView** - 꿈 일기 리스트 구현  
@@ -75,21 +75,30 @@
 
 ---
 
+## 💡 유료 API (DALL·E) 사용 경험과 아쉬운점
+
+이번 프로젝트에서 가장 큰 변화는, 기존의 **공공데이터 포털의 무료 API** 사용에서 벗어나 **처음으로 유료 API(OpenAI의 DALL·E)** 를 활용했다는 점입니다.
+
+- API 요금 정책 등을 직접 경험하며 **실제 상용 서비스에서의 API 사용**을 고려한 개발을 진행했습니다.
+- 이는 단순 기능 구현을 넘어서 **현실적인 기술 적용 겸험**을 할 수 있는 중요한 기회가 되었습니다.
+
+
 ## ❗ 아쉬운 점
-- DALL·E API 사용 시 **한글로 작성한 프롬프트는 이미지가 정확하게 생성되지 않는 경우가 많았고**,
-영어로 작성하더라도 **기대한 이미지와 다르게 생성되는 경우**가 있어 사용자 만족도가 다소 떨어질 수 있었습니다.
+- DALL·E API는 아직 한글 프롬프트에 대한 해석력이 부족하여, **한글로 입력된 내용은 원하는 이미지가 잘 생성되지 않는 경우**가 많았고
+가끔은 영어로 작성하더라도 **기대한 이미지와 다르게 생성되는 경우**가 있었습니다.
 - 향후에는 이미지 품질과 정확도를 높이기 위해 다른 이미지 생성 모델(예: SDXL, Gemini Vision 등)을 고려하거나,
 프롬프트 전처리 및 번역 최적화를 적용해볼 수 있을 것 같습니다.
 
+---
 
 <br> <br> <br>
 ## 실행 화면 (Screenshots & GIFs)
 
 <h3>메인 화면</h3>
-img src="screenshot/home.png" width="220"/>
+<img src="screenshot/home.png" width="220"/>
 
 
-<h3>이미지 생성 기능</h3>
+<h3>🎨 AI 이미지 생성 (DALL·E)</h3>
 
 <table>
   <tr>
@@ -99,27 +108,59 @@ img src="screenshot/home.png" width="220"/>
   </tr>
 </table>
 
-img src="screenshot/home.png" width="220"/>
+<table>
+  <tr>
+    <th>실행 GIF</th>
+  </tr>
+  <tr>
+    <td><img src="screenshot/makeimg_gif.gif" width="220"/></td>
+  </tr>
+</table>
+
 
 
 <br>
-<h3>⏳ 타이머 실행 예시 기본 모드(25분 공부 + 5분 휴식), 커스텀 모드</h3>
+<h3>🖊 일기 쓰기 </h3>
 
 <table>
   <tr>
-    <th>기본 모드</th>
-    <th>커스텀 모드</th>
-  </tr>
-  <tr>
-    <td><img src="screenshot/gifbasic.gif" width="225"/></td>
-    <td><img src="screenshot/gifcustom.gif" width="225"/></td>
+    <td><img src="screenshot/writediary2.png" width="225"/></td>
+    <td><img src="screenshot/writediary.png" width="225"/></td>
   </tr>
 </table>
-※ 실행 흐름을 확인할 수 있도록, 실제 앱 실행 장면을 녹화하고 필요 없는 부분을 잘라내어 GIF로 편집했습니다. <br>실제 사용 흐름을 간단하게 보여주기 위한 참고 영상입니다.
+
+<table>
+  <tr>
+    <th>실행 GIF</th>
+  </tr>
+  <tr>
+    <td><img src="screenshot/writediary_gif.gif" width="225"/></td>
+  </tr>
+</table>
+
+
 <br> <br>
 
-### 📊 공부 통계 화면
-<img src="screenshot/statistics.gif" alt="App Demo" width="250">
-
-
+<h3>📖 일기 보기 </h3>
+<table>
+   <tr>
+    <th>일기 목록</th>
+    <th>사진이 있는 일기</th>
+    <th>사진이 없는 일기</th>
+  </tr>
+   <tr>
+    <td><img src="screenshot/diarylist.png" width="225"/></td>
+    <td><img src="screenshot/diaryimage.png" width="225"/></td>
+    <td><img src="screenshot/diarynoimage.png" width="225"/></td>
+  </tr>
+</table>
+  
+<table>
+  <tr>
+    <th>실행 GIF</th>
+  </tr>
+  <tr>
+     <td><img src="screenshot/diarygif.gif" width="225"/></td>
+  </tr>
+</table>
 

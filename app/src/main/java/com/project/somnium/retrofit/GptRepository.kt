@@ -7,10 +7,6 @@ class GptRepository {
     private val service = NetworkClient.RetrofitClient.getClient().create(ApiService::class.java)
     private val apikey = "Bearer ${BuildConfig.Apikey}"
 
-    suspend fun gptRequest(prompt: String) {
-        val request = ImageRequestBody(prompt)
-        val call = service.postGptApiImage(apikey, request)
-
         suspend fun requestImage(prompt: String): Result<RecyclerDataModel> {
             return try {
                 val request = ImageRequestBody(prompt)
@@ -32,5 +28,4 @@ class GptRepository {
                 Result.failure(e)
             }
         }
-    }
 }

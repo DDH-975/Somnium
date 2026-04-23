@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.project.somnium.databinding.ActivityMakeImageBinding
 import com.project.somnium.makeImg_Recycler.Adapter
 import com.project.somnium.makeImg_Recycler.RecyclerDataModel
-import com.project.somnium.retrofit.GptRequest
+import com.project.somnium.retrofit.GptRepository
 
 
 class MakeImageActivity : AppCompatActivity() {
@@ -51,7 +51,7 @@ class MakeImageActivity : AppCompatActivity() {
             if (inputText.isNotBlank()) {
                 binding.etDreamInput.text.clear()
                 Toast.makeText(this,"이미지 생성중입니다.",Toast.LENGTH_SHORT).show()
-                val request = GptRequest(inputText, object : GptRequest.ApiCallback  {
+                val request = GptRepository(inputText, object : GptRepository.ApiCallback  {
                     override fun onDataReceived(data: RecyclerDataModel) {
                         recyclerDataModel.add(data)
                         recyclerAdapter.notifyDataSetChanged()

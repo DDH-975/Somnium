@@ -6,22 +6,21 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import com.project.somnium.databinding.ActivityMainBinding
-import com.project.somnium.diaryDb.DataBase
-import com.project.somnium.diary_List_Recycler.DiaryListAdapter
 import com.project.somnium.thumbnail_Recycler.ThumbnailAdapter
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import com.project.somnium.viewModel.MainActivityViewModel
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var viewModel: MainActivityViewModel
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityMainBinding.inflate(layoutInflater)
         enableEdgeToEdge()
         setContentView(binding.root)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
@@ -35,9 +34,7 @@ class MainActivity : AppCompatActivity() {
         val goToReadDiaryIntent = Intent(this@MainActivity, DiaryListActivity::class.java)
         val layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         val snapHelper = LinearSnapHelper()
-
-        val db = DataBase.getDatabase(this)
-        val diaryDao = db.DiaryDataDao()
+        viewModel = ViewModelProvider(this)[MainActivityViewModel::class.java]
 
         binding.recyclerThumbnail.apply {
             addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.HORIZONTAL))
@@ -46,13 +43,7 @@ class MainActivity : AppCompatActivity() {
 
         snapHelper.attachToRecyclerView(binding.recyclerThumbnail)
 
-        lifecycleScope.launch(Dispatchers.IO) {
-            val data = diaryDao.getDataDesc()
-            withContext(Dispatchers.Main) {
-                val adapter = ThumbnailAdapter(data.toMutableList())
-                binding.recyclerThumbnail.adapter = adapter
-            }
-        }
+        observeViewModel()
 
         binding.btnMakeImg.setOnClickListener {
             startActivity(goToMakeImageIntent)
@@ -65,7 +56,12 @@ class MainActivity : AppCompatActivity() {
         binding.btnReadDiary.setOnClickListener {
             startActivity(goToReadDiaryIntent)
         }
+    }
 
-
+    private fun observeViewModel() {
+        viewModel.thumbnailData.observe(this) { data ->
+            val adapter = ThumbnailAdapter(data.toList())
+            binding.recyclerThumbnail.adapter = adapter
+        }
     }
 }

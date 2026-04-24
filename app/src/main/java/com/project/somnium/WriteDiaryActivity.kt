@@ -12,12 +12,14 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.project.somnium.databinding.ActivityWriteDiaryBinding
 import com.project.somnium.diaryDb.DataBase
 import com.project.somnium.diaryDb.DiaryDao
 import com.project.somnium.diaryDb.DiaryDataClass
+import com.project.somnium.viewModel.WriteDiaryViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -29,6 +31,7 @@ class WriteDiaryActivity : AppCompatActivity() {
     private lateinit var content: String
     private var imageUri: Uri? = null
     private lateinit var binding: ActivityWriteDiaryBinding
+    private lateinit var viewModel: WriteDiaryViewModel
 
     private lateinit var goToListIntent: Intent
     private lateinit var goToMainIntent: Intent
@@ -69,7 +72,7 @@ class WriteDiaryActivity : AppCompatActivity() {
         goToListIntent = Intent(this@WriteDiaryActivity, DiaryListActivity::class.java)
         goToMainIntent = Intent(this@WriteDiaryActivity, MainActivity::class.java)
         returnToReadIntent = Intent(this@WriteDiaryActivity, ReadDiary::class.java)
-
+        viewModel = ViewModelProvider(this)[WriteDiaryViewModel::class.java]
 
         val db: DataBase = DataBase.getDatabase(this@WriteDiaryActivity)
         val diaryDao: DiaryDao = db.DiaryDataDao()

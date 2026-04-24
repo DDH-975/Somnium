@@ -1,5 +1,6 @@
 package com.project.somnium.diaryDb
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -33,5 +34,5 @@ interface DiaryDao {
             "from DiaryDB " +
             "where imgurl is not null " +
             "order by id desc limit 4")
-    suspend fun getDataDesc() : List<DiaryDataClass>
+    fun getDataDesc() : LiveData<List<DiaryDataClass>>
 }

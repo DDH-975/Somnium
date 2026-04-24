@@ -9,9 +9,7 @@ import com.project.somnium.retrofit.GptRepository
 import kotlinx.coroutines.launch
 
 class MakeImageViewModel : ViewModel() {
-
     private val repository = GptRepository()
-
     private val _imageData = MutableLiveData<RecyclerDataModel>()
     val imageData: LiveData<RecyclerDataModel> = _imageData
 

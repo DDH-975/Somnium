@@ -13,7 +13,7 @@ import com.project.somnium.R
 import com.project.somnium.ReadDiary
 import com.project.somnium.diaryDb.DiaryDataClass
 
-class ThumbnailAdapter(val items: MutableList<DiaryDataClass>) :
+class ThumbnailAdapter(val items: List<DiaryDataClass>) :
     RecyclerView.Adapter<ThumbnailAdapter.Viewholder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ThumbnailAdapter.Viewholder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.thumbnail_items,parent,false)
@@ -49,4 +49,5 @@ class ThumbnailAdapter(val items: MutableList<DiaryDataClass>) :
         val btn_detail = itemView.findViewById<Button>(R.id.btn_detail)
 
     }
+
 }

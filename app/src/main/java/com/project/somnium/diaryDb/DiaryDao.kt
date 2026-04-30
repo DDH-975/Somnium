@@ -28,7 +28,7 @@ interface DiaryDao {
     suspend fun updateByID(id: Int, title: String, content: String, imgUrl: String)
 
     @Query("select * from DiaryDB where id = :id")
-    suspend fun selectByID(id: Int) : DiaryDataClass
+    fun selectByID(id: Int) : LiveData<DiaryDataClass>
 
     @Query("select * " +
             "from DiaryDB " +

@@ -29,7 +29,5 @@ class WriteDiaryViewModel(application: Application) : AndroidViewModel(applicati
         }
     }
 
-    fun selectById(id: Int) {
-        _selectByIdData = repo.selectByID(id)
-    }
+    fun selectById(id: Int) { _selectByIdData = repo.selectByID(id) }
 }

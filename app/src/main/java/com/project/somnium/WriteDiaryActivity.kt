@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -13,16 +12,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.project.somnium.databinding.ActivityWriteDiaryBinding
 import com.project.somnium.diaryDb.DataBase
 import com.project.somnium.diaryDb.DiaryDao
 import com.project.somnium.diaryDb.DiaryDataClass
 import com.project.somnium.viewModel.WriteDiaryViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import java.time.LocalDate
 
 class WriteDiaryActivity : AppCompatActivity() {
@@ -90,7 +85,6 @@ class WriteDiaryActivity : AppCompatActivity() {
             type = "image/*"
         }
 
-
         binding.btnAddImage.setOnClickListener {
             pickImage.launch(imgSelectIntent)
         }
@@ -111,18 +105,17 @@ class WriteDiaryActivity : AppCompatActivity() {
 
         // 완료 버튼
         binding.btnComplete.setOnClickListener {
-            clickBtnComplete(diaryDao, mode, id)
+            clickBtnComplete(mode, id)
         }
     }
 
-
     //완료 버튼 클릭시 실행될 메서드
-    private fun clickBtnComplete(diaryDao: DiaryDao, mode: String?, id: Int) {
+    private fun clickBtnComplete(mode: String?, id: Int) {
         title = binding.etTitle.text.toString()
         content = binding.etContent.text.toString()
 
         if (title.isNotBlank() && content.isNotBlank()) {
-            saveData(diaryDao, mode, id) // 데이터 저장
+            saveData(mode, id) // 데이터 저장
         } else if (title.isBlank() && content.isNotBlank()) {
             Toast.makeText(this, "제목을 입력해주세요.", Toast.LENGTH_SHORT).show()
         } else if (title.isNotBlank() && content.isBlank()) {
@@ -133,7 +126,7 @@ class WriteDiaryActivity : AppCompatActivity() {
     }
 
     // DB 저장
-    private fun saveData(diaryDao: DiaryDao, mode: String?, id: Int) {
+    private fun saveData(mode: String?, id: Int) {
         if (mode.isNullOrBlank()) {
             val data = DiaryDataClass(
                 date = date.toString(),
@@ -141,53 +134,38 @@ class WriteDiaryActivity : AppCompatActivity() {
                 title = title,
                 imgurl = imageUri?.toString() ?: "null" // imageUri가 null일 경우 빈 문자열로 처리
             )
-            lifecycleScope.launch(Dispatchers.IO) {
-                diaryDao.insertData(data)
+            viewModel.insertData(data)
+            Toast.makeText(this@WriteDiaryActivity, "저장되었습니다.", Toast.LENGTH_SHORT).show()
+            startActivity(goToListIntent)
+            finish()
 
-                var test = diaryDao.getAllData()
-                Log.d("data Test", "data : $test")
-                withContext(Dispatchers.Main) {
-                    Toast.makeText(this@WriteDiaryActivity, "저장되었습니다.", Toast.LENGTH_SHORT).show()
-                    startActivity(goToListIntent)
-                    finish()
-                }
-            }
         } else {
-            lifecycleScope.launch(Dispatchers.IO) {
-                diaryDao.updateByID(id = id, title, content, imageUri?.toString() ?: "null")
-                var test = diaryDao.getAllData()
-                Log.d("data Test", "data : $test")
-
-                withContext(Dispatchers.Main) {
-                    Toast.makeText(this@WriteDiaryActivity, "수정되었습니다.", Toast.LENGTH_SHORT).show()
-                    returnToReadIntent.putExtra("id", id)
-                    setResult(Activity.RESULT_OK, returnToReadIntent)
-                    finish()
-                }
-            }
+            viewModel.updateById(id = id, title, content, imageUri?.toString() ?: "null")
+            Toast.makeText(this@WriteDiaryActivity, "수정되었습니다.", Toast.LENGTH_SHORT).show()
+            returnToReadIntent.putExtra("id", id)
+            setResult(Activity.RESULT_OK, returnToReadIntent)
+            finish()
         }
     }
-
 
     //수정 요청 시 ID로 선택된 일기의 데이터를 UI에 반영
     private fun editedRequest(diaryDao: DiaryDao, id: Int) {
-        lifecycleScope.launch(Dispatchers.IO) {
-            val data = diaryDao.selectByID(id)
-
-            withContext(Dispatchers.Main) {
-                binding.tvMode.setText("일기 수정")
-                binding.etTitle.setText("${data.title}")
-                binding.etContent.setText("${data.content}")
-
-                Glide.with(binding.root)
-                    .load("${data.imgurl}")
-                    .into(binding.imgSelectedIMG)
-
-                binding.bntDeleteIMG.visibility = View.VISIBLE
-            }
-        }
+        viewModel.selectById(id)
+        observeViewModel()
     }
 
+    private fun observeViewModel() {
+        viewModel.selectByIdData.observe(this) { data ->
+            binding.tvMode.setText("일기 수정")
+            binding.etTitle.setText("${data.title}")
+            binding.etContent.setText("${data.content}")
 
+            Glide.with(binding.root)
+                .load("${data.imgurl}")
+                .into(binding.imgSelectedIMG)
+
+            binding.bntDeleteIMG.visibility = View.VISIBLE
+        }
+    }
 }
 

@@ -6,19 +6,17 @@ import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.project.somnium.databinding.ActivityReadDiaryBinding
-import com.project.somnium.diaryDb.DataBase
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import com.project.somnium.viewModel.ReadDiaryViewModel
 
 class ReadDiary : AppCompatActivity() {
     private lateinit var binding: ActivityReadDiaryBinding
+    private val viewModel: ReadDiaryViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,44 +51,35 @@ class ReadDiary : AppCompatActivity() {
             goToWriteIntent.putExtra("id", id)
             requestLauncher.launch(goToWriteIntent)
         }
-
-
     }
 
     // 전달받은 id로 DB에서 일기 데이터를 가져와 UI에 출력
     private fun outPutData(id: Int) {
-        lifecycleScope.launch(Dispatchers.IO) {
-            val db = DataBase.getDatabase(this@ReadDiary)
-            val diaryDao = db.DiaryDataDao()
-            val data = diaryDao.selectByID(id)
-
-            withContext(Dispatchers.Main) {
-                setWidget(data.title, data.content, data.imgurl, data.date)
-            }
-        }
+        viewModel.selectById(id)
+        observeViewModel()
     }
 
+    private fun observeViewModel() {
+        viewModel._selectByIdData.observe(this) { data ->
+            if (data.imgurl == "null") {
+                listOf(binding.diaryImage, binding.tvDate).forEach { it.visibility = View.GONE }
+                binding.tvDateNoImg.visibility = View.VISIBLE
 
-    //위젯 설정
-    private fun setWidget(title: String?, content: String?, imgUrl: String?, date: String?) {
-        if (imgUrl == "null") {
-            listOf(binding.diaryImage, binding.tvDate).forEach { it.visibility = View.GONE }
-            binding.tvDateNoImg.visibility = View.VISIBLE
+                binding.tvDateNoImg.text = "${data.date}"
+                binding.tvTitle.text = "${data.title}"
+                binding.diaryContent.text = "${data.content}"
 
-            binding.tvDateNoImg.text = "${date}"
-            binding.tvTitle.text = "${title}"
-            binding.diaryContent.text = "${content}"
+            } else {
+                listOf(binding.diaryImage, binding.tvDate).forEach { it.visibility = View.VISIBLE }
+                binding.tvDateNoImg.visibility = View.GONE
 
-        } else {
-            listOf(binding.diaryImage, binding.tvDate).forEach { it.visibility = View.VISIBLE }
-            binding.tvDateNoImg.visibility = View.GONE
-
-            binding.tvTitle.text = "${title}"
-            binding.diaryContent.text = "${content}"
-            binding.tvDate.text = "${date}"
-            Glide.with(this)
-                .load("${imgUrl}")
-                .into(binding.diaryImage)
+                binding.tvTitle.text = "${data.title}"
+                binding.diaryContent.text = "${data.content}"
+                binding.tvDate.text = "${data.date}"
+                Glide.with(this)
+                    .load("${data.imgurl}")
+                    .into(binding.diaryImage)
+            }
         }
     }
 }

@@ -14,8 +14,7 @@ class WriteDiaryViewModel(application: Application) : AndroidViewModel(applicati
     private val diaryDao = db.DiaryDataDao()
     private val repo = DiaryRepository(diaryDao)
 
-    private lateinit var _selectByIdData: LiveData<DiaryDataClass>
-    val selectByIdData = _selectByIdData
+    lateinit var _selectByIdData: LiveData<DiaryDataClass>
 
     fun insertData(data: DiaryDataClass) {
         viewModelScope.launch {

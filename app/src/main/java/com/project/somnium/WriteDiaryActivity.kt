@@ -8,14 +8,12 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.project.somnium.databinding.ActivityWriteDiaryBinding
-import com.project.somnium.diaryDb.DataBase
-import com.project.somnium.diaryDb.DiaryDao
 import com.project.somnium.diaryDb.DiaryDataClass
 import com.project.somnium.viewModel.WriteDiaryViewModel
 import java.time.LocalDate
@@ -26,7 +24,7 @@ class WriteDiaryActivity : AppCompatActivity() {
     private lateinit var content: String
     private var imageUri: Uri? = null
     private lateinit var binding: ActivityWriteDiaryBinding
-    private lateinit var viewModel: WriteDiaryViewModel
+    private val viewModel: WriteDiaryViewModel by viewModels()
 
     private lateinit var goToListIntent: Intent
     private lateinit var goToMainIntent: Intent
@@ -67,16 +65,12 @@ class WriteDiaryActivity : AppCompatActivity() {
         goToListIntent = Intent(this@WriteDiaryActivity, DiaryListActivity::class.java)
         goToMainIntent = Intent(this@WriteDiaryActivity, MainActivity::class.java)
         returnToReadIntent = Intent(this@WriteDiaryActivity, ReadDiary::class.java)
-        viewModel = ViewModelProvider(this)[WriteDiaryViewModel::class.java]
-
-        val db: DataBase = DataBase.getDatabase(this@WriteDiaryActivity)
-        val diaryDao: DiaryDao = db.DiaryDataDao()
 
         val mode = intent.getStringExtra("mode")
         val id = intent.getIntExtra("id", -1)
 
         if (mode == "수정") {
-            editedRequest(diaryDao, id)
+            editedRequest(id)
         }
 
 
@@ -149,13 +143,13 @@ class WriteDiaryActivity : AppCompatActivity() {
     }
 
     //수정 요청 시 ID로 선택된 일기의 데이터를 UI에 반영
-    private fun editedRequest(diaryDao: DiaryDao, id: Int) {
+    private fun editedRequest(id: Int) {
         viewModel.selectById(id)
         observeViewModel()
     }
 
     private fun observeViewModel() {
-        viewModel.selectByIdData.observe(this) { data ->
+        viewModel._selectByIdData.observe(this) { data ->
             binding.tvMode.setText("일기 수정")
             binding.etTitle.setText("${data.title}")
             binding.etContent.setText("${data.content}")

@@ -8,12 +8,11 @@ import androidx.room.Query
 
 @Dao
 interface DiaryDao {
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertData(data: DiaryDataClass)
 
     @Query("select * from DiaryDB")
-    suspend fun getAllData(): List<DiaryDataClass>
+    fun getAllData(): LiveData<List<DiaryDataClass>>
 
     @Query("delete from DiaryDB")
     suspend fun deleteAllData()
@@ -28,11 +27,13 @@ interface DiaryDao {
     suspend fun updateByID(id: Int, title: String, content: String, imgUrl: String)
 
     @Query("select * from DiaryDB where id = :id")
-    fun selectByID(id: Int) : LiveData<DiaryDataClass>
+    fun selectByID(id: Int): LiveData<DiaryDataClass>
 
-    @Query("select * " +
-            "from DiaryDB " +
-            "where imgurl is not null " +
-            "order by id desc limit 4")
-    fun getDataDesc() : LiveData<List<DiaryDataClass>>
+    @Query(
+        "select * " +
+                "from DiaryDB " +
+                "where imgurl is not null " +
+                "order by id desc limit 4"
+    )
+    fun getDataDesc(): LiveData<List<DiaryDataClass>>
 }

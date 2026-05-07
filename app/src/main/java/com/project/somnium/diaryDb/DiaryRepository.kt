@@ -6,6 +6,8 @@ import kotlinx.coroutines.withContext
 
 class DiaryRepository(private val dao: DiaryDao) {
     fun getDataDesc(): LiveData<List<DiaryDataClass>> = dao.getDataDesc()
+    fun selectByID(id: Int): LiveData<DiaryDataClass> = dao.selectByID(id)
+    fun getAllData(): LiveData<List<DiaryDataClass>> = dao.getAllData()
 
     suspend fun insertData(data: DiaryDataClass) {
         withContext(Dispatchers.IO) {
@@ -19,5 +21,9 @@ class DiaryRepository(private val dao: DiaryDao) {
         }
     }
 
-    fun selectByID(id: Int): LiveData<DiaryDataClass> = dao.selectByID(id)
+    suspend fun deleteByTile(title: String) {
+        withContext(Dispatchers.IO) {
+            dao.deleteByTile(title)
+        }
+    }
 }

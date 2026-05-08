@@ -72,7 +72,7 @@ class WriteDiaryActivity : AppCompatActivity() {
         val id = intent.getIntExtra("id", -1)
 
         if (mode == "수정") {
-            editedRequest(id)
+            observeViewModel(id)
         }
 
 
@@ -144,14 +144,8 @@ class WriteDiaryActivity : AppCompatActivity() {
         }
     }
 
-    //수정 요청 시 ID로 선택된 일기의 데이터를 UI에 반영
-    private fun editedRequest(id: Int) {
-        viewModel.selectById(id)
-        observeViewModel()
-    }
-
-    private fun observeViewModel() {
-        viewModel._selectByIdData.observe(this) { data ->
+    private fun observeViewModel(id: Int) {
+        viewModel.selectById(id).observe(this) { data ->
             binding.tvMode.setText("일기 수정")
             binding.etTitle.setText("${data.title}")
             binding.etContent.setText("${data.content}")

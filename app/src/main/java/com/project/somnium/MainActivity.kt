@@ -3,10 +3,10 @@ package com.project.somnium
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
@@ -17,7 +17,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-    private lateinit var viewModel: MainActivityViewModel
+    private val viewModel: MainActivityViewModel by viewModels()
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,7 +36,6 @@ class MainActivity : AppCompatActivity() {
         val goToReadDiaryIntent = Intent(this@MainActivity, DiaryListActivity::class.java)
         val layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         val snapHelper = LinearSnapHelper()
-        viewModel = ViewModelProvider(this)[MainActivityViewModel::class.java]
 
         binding.recyclerThumbnail.apply {
             addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.HORIZONTAL))

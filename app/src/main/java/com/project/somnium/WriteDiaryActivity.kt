@@ -16,8 +16,10 @@ import com.bumptech.glide.Glide
 import com.project.somnium.databinding.ActivityWriteDiaryBinding
 import com.project.somnium.diaryDb.DiaryDataClass
 import com.project.somnium.viewModel.WriteDiaryViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import java.time.LocalDate
 
+@AndroidEntryPoint
 class WriteDiaryActivity : AppCompatActivity() {
     private val date = LocalDate.now()
     private lateinit var title: String

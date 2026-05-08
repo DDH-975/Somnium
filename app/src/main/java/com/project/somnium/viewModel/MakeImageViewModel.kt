@@ -6,10 +6,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.project.somnium.makeImg_Recycler.RecyclerDataModel
 import com.project.somnium.retrofit.GptRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class MakeImageViewModel : ViewModel() {
-    private val repository = GptRepository()
+@HiltViewModel
+class MakeImageViewModel @Inject constructor(
+    private val repository: GptRepository
+) : ViewModel() {
     private val _imageData = MutableLiveData<RecyclerDataModel>()
     val imageData: LiveData<RecyclerDataModel> = _imageData
 

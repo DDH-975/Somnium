@@ -36,7 +36,7 @@ class ReadDiary : AppCompatActivity() {
         ) {
             val updateId = it.data?.getIntExtra("id", -1) ?: -1
 
-            outPutData(updateId)
+            observeViewModel(updateId)
 
         }
 
@@ -44,7 +44,7 @@ class ReadDiary : AppCompatActivity() {
 
         val id = intent.getIntExtra("id", -1)
 
-        outPutData(id)
+        observeViewModel(id)
 
 
         //수정 버튼
@@ -55,14 +55,8 @@ class ReadDiary : AppCompatActivity() {
         }
     }
 
-    // 전달받은 id로 DB에서 일기 데이터를 가져와 UI에 출력
-    private fun outPutData(id: Int) {
-        viewModel.selectById(id)
-        observeViewModel()
-    }
-
-    private fun observeViewModel() {
-        viewModel._selectByIdData.observe(this) { data ->
+    private fun observeViewModel(id: Int) {
+        viewModel.selectById(id).observe(this) { data ->
             if (data.imgurl == "null") {
                 listOf(binding.diaryImage, binding.tvDate).forEach { it.visibility = View.GONE }
                 binding.tvDateNoImg.visibility = View.VISIBLE

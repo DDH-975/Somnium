@@ -9,7 +9,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.project.somnium.R
-import com.project.somnium.ReadDiary
+import com.project.somnium.ReadDiaryActivity
 import com.project.somnium.diaryDb.DiaryDataClass
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -31,7 +31,7 @@ class DiaryListAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = items[position]
         val context = holder.itemView.context
-        val intent = Intent(context, ReadDiary::class.java)
+        val intent = Intent(context, ReadDiaryActivity::class.java)
 
         holder.tv_title.text = "제목 : ${item.title}"
         holder.tv_date.text = "작성일자 : ${item.date}"

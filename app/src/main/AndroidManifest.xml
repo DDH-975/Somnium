@@ -19,7 +19,7 @@
         tools:targetApi="31"
         android:name=".di.DiApplication">
         <activity
-            android:name=".ReadDiary"
+            android:name=".ReadDiaryActivity"
             android:exported="false" />
         <activity
             android:name=".DiaryListActivity"

@@ -10,7 +10,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.project.somnium.R
-import com.project.somnium.ReadDiary
+import com.project.somnium.ReadDiaryActivity
 import com.project.somnium.diaryDb.DiaryDataClass
 
 class ThumbnailAdapter(val items: List<DiaryDataClass>) :
@@ -22,7 +22,7 @@ class ThumbnailAdapter(val items: List<DiaryDataClass>) :
     }
 
     override fun onBindViewHolder(holder: ThumbnailAdapter.Viewholder, position: Int) {
-        val gotoReadDiaryIntent = Intent(holder.itemView.context, ReadDiary::class.java)
+        val gotoReadDiaryIntent = Intent(holder.itemView.context, ReadDiaryActivity::class.java)
         val item = items[position]
         val id = item.id
 

@@ -66,7 +66,7 @@ class WriteDiaryActivity : AppCompatActivity() {
 
         goToListIntent = Intent(this@WriteDiaryActivity, DiaryListActivity::class.java)
         goToMainIntent = Intent(this@WriteDiaryActivity, MainActivity::class.java)
-        returnToReadIntent = Intent(this@WriteDiaryActivity, ReadDiary::class.java)
+        returnToReadIntent = Intent(this@WriteDiaryActivity, ReadDiaryActivity::class.java)
 
         val mode = intent.getStringExtra("mode")
         val id = intent.getIntExtra("id", -1)

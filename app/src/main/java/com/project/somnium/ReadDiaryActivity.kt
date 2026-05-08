@@ -16,7 +16,7 @@ import com.project.somnium.viewModel.ReadDiaryViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ReadDiary : AppCompatActivity() {
+class ReadDiaryActivity : AppCompatActivity() {
     private lateinit var binding: ActivityReadDiaryBinding
     private val viewModel: ReadDiaryViewModel by viewModels()
 
@@ -40,7 +40,7 @@ class ReadDiary : AppCompatActivity() {
 
         }
 
-        val goToWriteIntent = Intent(this@ReadDiary, WriteDiaryActivity::class.java)
+        val goToWriteIntent = Intent(this@ReadDiaryActivity, WriteDiaryActivity::class.java)
 
         val id = intent.getIntExtra("id", -1)
 

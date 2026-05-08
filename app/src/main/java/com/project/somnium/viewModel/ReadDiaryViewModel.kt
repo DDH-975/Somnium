@@ -9,8 +9,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ReadDiaryViewModel @Inject constructor(private val repo: DiaryRepository) : ViewModel() {
-    lateinit var _selectByIdData: LiveData<DiaryDataClass>
-    fun selectById(id: Int) {
-        _selectByIdData = repo.selectByID(id)
+    fun selectById(id: Int): LiveData<DiaryDataClass> {
+        return repo.selectByID(id)
     }
 }

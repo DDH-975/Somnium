@@ -1,19 +1,17 @@
 package com.project.somnium.viewModel
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.project.somnium.diaryDb.DataBase
 import com.project.somnium.diaryDb.DiaryDataClass
 import com.project.somnium.diaryDb.DiaryRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class WriteDiaryViewModel(application: Application) : AndroidViewModel(application) {
-    private val db = DataBase.getDatabase(application)
-    private val diaryDao = db.DiaryDataDao()
-    private val repo = DiaryRepository(diaryDao)
-
+@HiltViewModel
+class WriteDiaryViewModel @Inject constructor(
+    private val repo: DiaryRepository) : ViewModel() {
     lateinit var _selectByIdData: LiveData<DiaryDataClass>
 
     fun insertData(data: DiaryDataClass) {
@@ -28,5 +26,7 @@ class WriteDiaryViewModel(application: Application) : AndroidViewModel(applicati
         }
     }
 
-    fun selectById(id: Int) { _selectByIdData = repo.selectByID(id) }
+    fun selectById(id: Int) {
+        _selectByIdData = repo.selectByID(id)
+    }
 }

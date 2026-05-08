@@ -10,9 +10,10 @@ import com.project.somnium.databinding.ActivityMakeImageBinding
 import com.project.somnium.makeImg_Recycler.Adapter
 import com.project.somnium.makeImg_Recycler.RecyclerDataModel
 import com.project.somnium.viewModel.MakeImageViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MakeImageActivity : AppCompatActivity() {
-
     private lateinit var binding: ActivityMakeImageBinding
     private lateinit var recyclerAdapter: Adapter
     private val recyclerDataModel = ArrayList<RecyclerDataModel>()

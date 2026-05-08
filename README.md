@@ -97,6 +97,228 @@
 - 사용자가 최근에 기록한 꿈의 제목, 작성 날짜, 대표 이미지를 한눈에 확인할 수 있도록 구성했습니다.
 - 썸네일 카드를 통해 꿈 내용을 간편하게 확인하고, "자세히 보기" 버튼으로 상세 페이지로 이동할 수 있습니다.
 
+--- 
+
+## ⚙ 코드 리팩토링 26. 05. 08
+
+이번 리팩토링의 목표는 기존 프로젝트에  
+**MVVM 아키텍처 패턴 적용** 및 **Hilt 기반 의존성 주입(DI)** 을 도입하여  
+프로젝트의 유지보수성과 역할 분리를 개선하는 것이었습니다.
+
+리팩토링은 아래 순서로 진행했습니다.
+
+```text
+기존 구조
+   ↓
+MVVM 패턴 적용
+   ↓
+Hilt 의존성 주입 적용
+````
+
+---
+
+## 📌 MVVM 패턴 적용
+
+기존에는 Activity가 UI 처리와 데이터 처리 로직을 함께 담당하고 있어
+코드가 비대해질 가능성이 있었고, 역할 분리가 명확하지 않았습니다.
+
+이를 개선하기 위해 MVVM 구조로 리팩토링을 진행했습니다.
+
+### 🔄 변경 사항
+
+* Activity → UI 처리 전담
+* ViewModel → UI 상태 관리 및 비즈니스 로직 처리
+* Repository → Room / Retrofit 데이터 처리 담당
+
+---
+
+### 📂 ViewModel 분리
+
+화면별로 ViewModel을 분리하여 각 화면의 책임을 명확하게 구성했습니다.
+
+| ViewModel               | 역할                      |
+| ----------------------- | ----------------------- |
+| `MainActivityViewModel` | 메인 썸네일 데이터 관리           |
+| `DiaryListViewModel`    | 꿈 일기 목록 조회 및 삭제         |
+| `ReadDiaryViewModel`    | 상세 일기 조회                |
+| `WriteDiaryViewModel`   | 일기 저장 및 수정              |
+| `MakeImageViewModel`    | OpenAI DALL·E 이미지 생성 처리 |
+
+---
+
+### 📌 Repository 패턴 적용
+
+Room DB 및 Retrofit API 접근 로직을 Repository로 분리했습니다.
+
+#### DiaryRepository
+
+* Room 데이터 접근 담당
+* Coroutine + IO Dispatcher를 통한 비동기 처리
+* 데이터 CRUD 로직 캡슐화
+
+#### GptRepository
+
+* OpenAI API 요청 처리
+* API 성공/실패 상태를 `Result<T>` 형태로 관리
+* 네트워크 로직과 UI 로직 분리
+
+---
+
+### 📌 LiveData 기반 상태 관리
+
+ViewModel에서 LiveData를 사용하여
+UI가 데이터를 관찰(Observe)하는 구조로 변경했습니다.
+
+```kotlin
+viewModel.imageData.observe(this) { data ->
+    recyclerDataModel.add(data)
+    recyclerAdapter.notifyDataSetChanged()
+}
+```
+
+이를 통해 데이터 변경 시 UI가 자동으로 갱신되도록 구성했습니다.
+
+---
+
+### 📌 Coroutine 적용 개선
+
+기존의 단순 비동기 처리 방식에서 벗어나
+Coroutine 기반 구조로 개선했습니다.
+
+```kotlin
+viewModelScope.launch {
+    repo.insertData(data)
+}
+```
+
+* `viewModelScope.launch`
+
+  * Lifecycle 기반 Coroutine 처리
+  * 메모리 누수 방지
+
+* `Dispatchers.IO`
+
+  * Room 및 Retrofit 작업을 백그라운드에서 처리
+  * UI 지연 방지
+
+---
+
+## 📌 Hilt 의존성 주입(DI) 적용
+
+MVVM 적용 이후에는 객체 생성 책임을 분리하기 위해
+Hilt 기반 DI 구조를 도입했습니다.
+
+---
+
+### 🔄 기존 방식의 문제점
+
+기존에는 Activity 또는 클래스 내부에서 객체를 직접 생성해야 했습니다.
+
+```kotlin
+val retrofit = Retrofit.Builder()...
+```
+
+이 방식은:
+
+* 클래스 간 결합도가 높아지고
+* 객체 관리가 어려우며
+* 테스트 및 유지보수에 불리한 구조였습니다.
+
+---
+
+### ✅ Hilt 적용 후 개선점
+
+Hilt를 적용하면서 객체 생성 책임을 외부로 분리했습니다.
+
+```kotlin
+@HiltViewModel
+class MakeImageViewModel @Inject constructor(
+    private val repository: GptRepository
+) : ViewModel()
+```
+
+이를 통해:
+
+* 객체 생성 코드 제거
+* 의존성 관리 자동화
+* 클래스 간 결합도 감소
+* 유지보수성 향상
+
+등의 개선 효과를 얻을 수 있었습니다.
+
+---
+
+## 📌 Module 구성
+
+### DatabaseModule
+
+* Room Database Singleton 관리
+* DAO 객체 제공
+
+### RetrofitModule
+
+* Retrofit Singleton 관리
+* OkHttpClient 설정
+* LoggingInterceptor 적용
+* Gson Converter 설정
+
+---
+
+## 📌 Activity 구조 개선
+
+기존에는 Activity에서 데이터 처리 로직까지 담당할 가능성이 있었지만,
+리팩토링 이후에는 UI 처리 역할만 담당하도록 구조를 변경했습니다.
+
+```text
+Activity
+   ↓
+ViewModel
+   ↓
+Repository
+   ↓
+Room / Retrofit
+```
+
+이를 통해:
+
+* 역할 분리 명확화
+* 코드 가독성 향상
+* 유지보수성 개선
+* 재사용성 증가
+
+등의 효과를 얻을 수 있었습니다.
+
+---
+
+## 💡 리팩토링을 통해 배운 점
+
+이번 리팩토링을 진행하면서 단순히 기능을 구현하는 것과  
+구조를 고려하며 프로젝트를 설계하는 것은 큰 차이가 있다는 점을 느낄 수 있었습니다.
+
+처음 리팩토링을 진행하기 전에는 여러 로직들이 하나의 Activity 내부에 섞여 있었고,  
+직접 만든 프로젝트임에도 프로젝트 흐름과 구조를 다시 파악하는 데 시간이 걸렸습니다.
+
+하지만 MVVM 패턴을 적용하면서  
+UI 처리, 데이터 처리, 비즈니스 로직의 역할이 분리되기 시작했고,  
+각 클래스가 어떤 역할을 담당하는지 이전보다 훨씬 명확하게 보이기 시작했습니다.
+
+특히:
+- Activity는 UI 처리
+- ViewModel은 상태 관리
+- Repository는 데이터 처리
+
+처럼 역할이 나뉘면서  
+기능 수정이나 유지보수를 진행할 때 어디를 수정해야 하는지 빠르게 파악할 수 있었고,  
+MVVM과 같은 아키텍처 구조의 중요성을 직접 체감할 수 있었습니다.
+
+또한 이후 Hilt를 적용하면서  
+Retrofit, Room Database 같은 객체를 직접 생성하지 않고 필요한 곳에서 주입받는 구조로 변경할 수 있었고,  
+객체 생성 코드가 줄어들면서 코드 흐름도 이전보다 훨씬 깔끔해졌습니다.
+
+이번 리팩토링 경험을 통해  
+단순히 동작하는 앱을 만드는 것을 넘어,  
+유지보수성과 확장성을 고려한 구조 설계가 왜 중요한지 배울 수 있었습니다.
+
 ---
 
 <br> <br> <br>

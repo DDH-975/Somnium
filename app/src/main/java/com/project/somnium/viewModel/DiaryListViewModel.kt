@@ -1,16 +1,16 @@
 package com.project.somnium.viewModel
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.project.somnium.diaryDb.DataBase
 import com.project.somnium.diaryDb.DiaryRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class DiaryListViewModel(application: Application) : AndroidViewModel(application) {
-    private val db = DataBase.getDatabase(application)
-    private val diaryDao = db.DiaryDataDao()
-    private val repo = DiaryRepository(diaryDao)
+@HiltViewModel
+class DiaryListViewModel @Inject constructor(
+    private val repo: DiaryRepository
+) : ViewModel() {
     val allData = repo.getAllData()
 
     fun deleteByTile(title: String) {

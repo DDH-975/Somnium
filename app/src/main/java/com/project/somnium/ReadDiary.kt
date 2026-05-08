@@ -13,7 +13,9 @@ import androidx.core.view.WindowInsetsCompat
 import com.bumptech.glide.Glide
 import com.project.somnium.databinding.ActivityReadDiaryBinding
 import com.project.somnium.viewModel.ReadDiaryViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ReadDiary : AppCompatActivity() {
     private lateinit var binding: ActivityReadDiaryBinding
     private val viewModel: ReadDiaryViewModel by viewModels()

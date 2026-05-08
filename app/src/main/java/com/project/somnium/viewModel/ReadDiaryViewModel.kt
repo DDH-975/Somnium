@@ -1,18 +1,16 @@
 package com.project.somnium.viewModel
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import com.project.somnium.diaryDb.DataBase
+import androidx.lifecycle.ViewModel
 import com.project.somnium.diaryDb.DiaryDataClass
 import com.project.somnium.diaryDb.DiaryRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class ReadDiaryViewModel(application: Application): AndroidViewModel(application) {
-    val db = DataBase.getDatabase(application)
-    val diaryDao = db.DiaryDataDao()
-    val repo = DiaryRepository(diaryDao)
-
+@HiltViewModel
+class ReadDiaryViewModel @Inject constructor(private val repo: DiaryRepository) : ViewModel() {
     lateinit var _selectByIdData: LiveData<DiaryDataClass>
-
-    fun selectById(id: Int) { _selectByIdData = repo.selectByID(id) }
+    fun selectById(id: Int) {
+        _selectByIdData = repo.selectByID(id)
+    }
 }

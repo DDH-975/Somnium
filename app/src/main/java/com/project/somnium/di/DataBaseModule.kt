@@ -29,6 +29,4 @@ object DataBaseModule {
     fun providesDao(dataBase: DataBase): DiaryDao{
         return dataBase.DiaryDataDao()
     }
-
-
 }

@@ -1,4 +1,4 @@
-package com.project.somnium.retrofit
+package com.project.somnium.data.remote
 
 data class ImageRequestBody(
     val prompt: String,

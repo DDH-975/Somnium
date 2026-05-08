@@ -1,4 +1,4 @@
-package com.project.somnium.diary_List_Recycler
+package com.project.somnium.ui.adapter
 
 import android.content.Intent
 import android.view.LayoutInflater
@@ -9,8 +9,8 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.project.somnium.R
-import com.project.somnium.ReadDiaryActivity
-import com.project.somnium.diaryDb.DiaryDataClass
+import com.project.somnium.ui.activity.ReadDiaryActivity
+import com.project.somnium.data.local.DiaryDataClass
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -21,7 +21,7 @@ class DiaryListAdapter(
 ) : RecyclerView.Adapter<DiaryListAdapter.ViewHolder>() {
     private var checkedClick = true
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DiaryListAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view =
             LayoutInflater.from(parent.context)
                 .inflate(R.layout.diary_list_recyler_itmes, parent, false)

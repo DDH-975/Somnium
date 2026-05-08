@@ -1,4 +1,4 @@
-package com.project.somnium
+package com.project.somnium.ui.activity
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
@@ -8,9 +8,10 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.project.somnium.R
 import com.project.somnium.databinding.ActivityDiaryListBinding
-import com.project.somnium.diary_List_Recycler.DiaryListAdapter
-import com.project.somnium.viewModel.DiaryListViewModel
+import com.project.somnium.ui.adapter.DiaryListAdapter
+import com.project.somnium.ui.viewModel.DiaryListViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

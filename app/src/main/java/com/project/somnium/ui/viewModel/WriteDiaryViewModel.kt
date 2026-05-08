@@ -1,10 +1,10 @@
-package com.project.somnium.viewModel
+package com.project.somnium.ui.viewModel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.project.somnium.diaryDb.DiaryDataClass
-import com.project.somnium.diaryDb.DiaryRepository
+import com.project.somnium.data.local.DiaryDataClass
+import com.project.somnium.data.repository.DiaryRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

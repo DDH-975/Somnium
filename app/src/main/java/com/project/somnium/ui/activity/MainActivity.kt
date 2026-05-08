@@ -1,4 +1,4 @@
-package com.project.somnium
+package com.project.somnium.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,9 +10,10 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
+import com.project.somnium.R
 import com.project.somnium.databinding.ActivityMainBinding
-import com.project.somnium.thumbnail_Recycler.ThumbnailAdapter
-import com.project.somnium.viewModel.MainActivityViewModel
+import com.project.somnium.ui.adapter.ThumbnailAdapter
+import com.project.somnium.ui.viewModel.MainActivityViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

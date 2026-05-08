@@ -1,4 +1,4 @@
-package com.project.somnium.retrofit
+package com.project.somnium.data.remote
 
 import retrofit2.Response
 import retrofit2.http.Body

@@ -1,6 +1,5 @@
-package com.project.somnium
+package com.project.somnium.ui.activity
 
-import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -13,9 +12,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.bumptech.glide.Glide
+import com.project.somnium.R
 import com.project.somnium.databinding.ActivityWriteDiaryBinding
-import com.project.somnium.diaryDb.DiaryDataClass
-import com.project.somnium.viewModel.WriteDiaryViewModel
+import com.project.somnium.data.local.DiaryDataClass
+import com.project.somnium.ui.viewModel.WriteDiaryViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.time.LocalDate
 
@@ -34,7 +34,7 @@ class WriteDiaryActivity : AppCompatActivity() {
 
     private val pickImage =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            if (result.resultCode == Activity.RESULT_OK) {
+            if (result.resultCode == RESULT_OK) {
                 val data: Intent? = result.data
                 imageUri = data?.data
                 imageUri?.let {
@@ -78,7 +78,7 @@ class WriteDiaryActivity : AppCompatActivity() {
 
         val imgSelectIntent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
             addCategory(Intent.CATEGORY_OPENABLE)
-            type = "image/*"
+            setType("image/*")
         }
 
         binding.btnAddImage.setOnClickListener {
@@ -139,7 +139,7 @@ class WriteDiaryActivity : AppCompatActivity() {
             viewModel.updateById(id = id, title, content, imageUri?.toString() ?: "null")
             Toast.makeText(this@WriteDiaryActivity, "수정되었습니다.", Toast.LENGTH_SHORT).show()
             returnToReadIntent.putExtra("id", id)
-            setResult(Activity.RESULT_OK, returnToReadIntent)
+            setResult(RESULT_OK, returnToReadIntent)
             finish()
         }
     }

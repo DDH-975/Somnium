@@ -1,4 +1,4 @@
-package com.project.somnium
+package com.project.somnium.ui.activity
 
 import android.os.Bundle
 import android.widget.Toast
@@ -7,9 +7,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.project.somnium.databinding.ActivityMakeImageBinding
-import com.project.somnium.makeImg_Recycler.Adapter
-import com.project.somnium.makeImg_Recycler.RecyclerDataModel
-import com.project.somnium.viewModel.MakeImageViewModel
+import com.project.somnium.ui.adapter.Adapter
+import com.project.somnium.data.RecyclerDataModel
+import com.project.somnium.ui.viewModel.MakeImageViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

@@ -1,4 +1,4 @@
-package com.project.somnium.thumbnail_Recycler
+package com.project.somnium.ui.adapter
 
 import android.content.Intent
 import android.view.LayoutInflater
@@ -10,18 +10,18 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.project.somnium.R
-import com.project.somnium.ReadDiaryActivity
-import com.project.somnium.diaryDb.DiaryDataClass
+import com.project.somnium.data.local.DiaryDataClass
+import com.project.somnium.ui.activity.ReadDiaryActivity
 
 class ThumbnailAdapter(val items: List<DiaryDataClass>) :
     RecyclerView.Adapter<ThumbnailAdapter.Viewholder>() {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ThumbnailAdapter.Viewholder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Viewholder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.thumbnail_items,parent,false)
         return Viewholder(view)
 
     }
 
-    override fun onBindViewHolder(holder: ThumbnailAdapter.Viewholder, position: Int) {
+    override fun onBindViewHolder(holder: Viewholder, position: Int) {
         val gotoReadDiaryIntent = Intent(holder.itemView.context, ReadDiaryActivity::class.java)
         val item = items[position]
         val id = item.id

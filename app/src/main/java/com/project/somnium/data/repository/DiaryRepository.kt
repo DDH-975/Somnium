@@ -1,6 +1,8 @@
-package com.project.somnium.diaryDb
+package com.project.somnium.data.repository
 
 import androidx.lifecycle.LiveData
+import com.project.somnium.data.local.DiaryDao
+import com.project.somnium.data.local.DiaryDataClass
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject

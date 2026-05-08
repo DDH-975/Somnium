@@ -1,8 +1,7 @@
-package com.project.somnium.diaryDb
+package com.project.somnium.data.local
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-
 
 @Entity(tableName = "DiaryDB")
 data class DiaryDataClass(

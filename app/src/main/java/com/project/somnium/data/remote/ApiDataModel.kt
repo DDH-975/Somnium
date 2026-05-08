@@ -1,4 +1,4 @@
-package com.project.somnium.retrofit
+package com.project.somnium.data.remote
 
 data class ApiDataModel(
      val created : Long,

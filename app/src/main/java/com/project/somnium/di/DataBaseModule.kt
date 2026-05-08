@@ -1,10 +1,9 @@
 package com.project.somnium.di
 
-import android.app.Application
 import android.content.Context
 import androidx.room.Room
-import com.project.somnium.diaryDb.DataBase
-import com.project.somnium.diaryDb.DiaryDao
+import com.project.somnium.data.local.DataBase
+import com.project.somnium.data.local.DiaryDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

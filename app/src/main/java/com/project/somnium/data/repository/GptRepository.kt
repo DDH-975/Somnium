@@ -1,7 +1,9 @@
-package com.project.somnium.retrofit
+package com.project.somnium.data.repository
 
 import com.project.somnium.BuildConfig
-import com.project.somnium.makeImg_Recycler.RecyclerDataModel
+import com.project.somnium.data.RecyclerDataModel
+import com.project.somnium.data.remote.ApiService
+import com.project.somnium.data.remote.ImageRequestBody
 import javax.inject.Inject
 
 class GptRepository @Inject constructor(

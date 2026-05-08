@@ -1,4 +1,4 @@
-package com.project.somnium.makeImg_Recycler
+package com.project.somnium.ui.adapter
 
 import android.content.ContentValues
 import android.content.Context
@@ -21,6 +21,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import com.project.somnium.R
+import com.project.somnium.data.RecyclerDataModel
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -31,13 +32,13 @@ class Adapter(val itemList: ArrayList<RecyclerDataModel>) :
     RecyclerView.Adapter<Adapter.ViewHolder>() {
 
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Adapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view =
             LayoutInflater.from(parent.context).inflate(R.layout.recycler_items, parent, false)
         return ViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: Adapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = itemList[position]
 
         holder.tv_coment.text = item.coment

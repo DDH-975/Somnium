@@ -1,4 +1,4 @@
-package com.project.somnium.diaryDb
+package com.project.somnium.data.local
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
@@ -8,7 +8,7 @@ import androidx.room.Query
 
 @Dao
 interface DiaryDao {
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.Companion.REPLACE)
     suspend fun insertData(data: DiaryDataClass)
 
     @Query("select * from DiaryDB")

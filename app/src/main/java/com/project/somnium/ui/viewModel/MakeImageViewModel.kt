@@ -1,11 +1,11 @@
-package com.project.somnium.viewModel
+package com.project.somnium.ui.viewModel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.project.somnium.makeImg_Recycler.RecyclerDataModel
-import com.project.somnium.retrofit.GptRepository
+import com.project.somnium.data.RecyclerDataModel
+import com.project.somnium.data.repository.GptRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

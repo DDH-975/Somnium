@@ -1,4 +1,4 @@
-package com.project.somnium.diaryDb
+package com.project.somnium.data.local
 
 import androidx.room.Database
 import androidx.room.RoomDatabase

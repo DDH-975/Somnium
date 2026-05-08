@@ -1,4 +1,4 @@
-package com.project.somnium
+package com.project.somnium.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
@@ -11,8 +11,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.bumptech.glide.Glide
+import com.project.somnium.R
 import com.project.somnium.databinding.ActivityReadDiaryBinding
-import com.project.somnium.viewModel.ReadDiaryViewModel
+import com.project.somnium.ui.viewModel.ReadDiaryViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

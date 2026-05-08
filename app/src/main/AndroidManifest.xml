@@ -16,7 +16,8 @@
         android:roundIcon="@mipmap/applogo2"
         android:supportsRtl="true"
         android:theme="@style/Theme.Somnium"
-        tools:targetApi="31">
+        tools:targetApi="31"
+        android:name=".di.DiApplication">
         <activity
             android:name=".ReadDiary"
             android:exported="false" />

@@ -11,8 +11,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class WriteDiaryViewModel @Inject constructor(
-    private val repo: DiaryRepository) : ViewModel() {
-    lateinit var _selectByIdData: LiveData<DiaryDataClass>
+    private val repo: DiaryRepository
+) : ViewModel() {
 
     fun insertData(data: DiaryDataClass) {
         viewModelScope.launch {
@@ -26,7 +26,7 @@ class WriteDiaryViewModel @Inject constructor(
         }
     }
 
-    fun selectById(id: Int) {
-        _selectByIdData = repo.selectByID(id)
+    fun selectById(id: Int): LiveData<DiaryDataClass> {
+        return repo.selectByID(id)
     }
 }

@@ -11,7 +11,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.project.somnium.databinding.ActivityDiaryListBinding
 import com.project.somnium.diary_List_Recycler.DiaryListAdapter
 import com.project.somnium.viewModel.DiaryListViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class DiaryListActivity : AppCompatActivity() {
     private val viewModel: DiaryListViewModel by viewModels()
     private lateinit var binding: ActivityDiaryListBinding

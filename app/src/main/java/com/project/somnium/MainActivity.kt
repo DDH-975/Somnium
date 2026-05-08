@@ -13,7 +13,9 @@ import androidx.recyclerview.widget.LinearSnapHelper
 import com.project.somnium.databinding.ActivityMainBinding
 import com.project.somnium.thumbnail_Recycler.ThumbnailAdapter
 import com.project.somnium.viewModel.MainActivityViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var viewModel: MainActivityViewModel
     private lateinit var binding: ActivityMainBinding
